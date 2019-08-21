@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+
 using System.Threading.Tasks;
 
 namespace SalesWebMvc.Models
@@ -10,7 +11,31 @@ namespace SalesWebMvc.Models
 
     {
         [Key]
-        public  int Iid { get; set; }
-        public string  Name { get; set; }
+        public int Iid { get; set; }
+        public string Name { get; set; }
+        public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+
+
+        public Department()
+        {
+
+        }
+
+        public Department(int iid, string name)
+        {
+            Iid = iid;
+            Name = name;
+        }
+
+        public void AddSeller(Seller seller)
+        {
+            Sellers.Add(seller);
+        }
+
+        public double TotalSales(DateTime inicial, DateTime final)
+        {
+            return Sellers.Sum(Seller => Seller.TotalSales(inicial, final));
+        }
+
     }
 }
