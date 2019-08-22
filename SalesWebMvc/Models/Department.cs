@@ -13,7 +13,7 @@ namespace SalesWebMvc.Models
         [Key]
         public int Iid { get; set; }
         public string Name { get; set; }
-        public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+        public ICollection<Seller> Seller { get; set; } = new List<Seller>();
 
 
         public Department()
@@ -29,12 +29,12 @@ namespace SalesWebMvc.Models
 
         public void AddSeller(Seller seller)
         {
-            Sellers.Add(seller);
+            Seller.Add(seller);
         }
 
         public double TotalSales(DateTime inicial, DateTime final)
         {
-            return Sellers.Sum(Seller => Seller.TotalSales(inicial, final));
+            return Seller.Sum(Seller => Seller.TotalSales(inicial, final));
         }
 
     }
